@@ -1,5 +1,11 @@
 # Douyin-Youth-training
 
-test
+## base
+基础功能
 
-我铁好人队
+## interaction
+互动方向
+
+## socialize
+社交方向
+
