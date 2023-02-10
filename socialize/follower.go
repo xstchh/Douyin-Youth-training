@@ -1,37 +1,34 @@
 package socialize
 
 import (
-	"fmt"
-	"io/ioutil"
+	"github.com/cloudwego/hertz/pkg/app"
 	"net/http"
 )
 
-func followerlist() {
+type Response struct {
+	StatusCode int32  `json:"status_code"`
+	StatusMsg  string `json:"status_msg,omitempty"`
+}
+type UserListResponse struct {
+	Response
+	UserList []User `json:"user_list"`
+}
 
-	url := "/douyin/relation/follower/list/?user_id=&token="
-	method := "GET"
+type User struct {
+	Id            int64
+	Name          string
+	FollowCount   int64
+	FollowerCount int64
+	IsFollow      bool
+	FollowerList  []User
+}
 
-	client := &http.Client{}
-	// 创建新请求
-	req, err := http.NewRequest(method, url, nil)
-
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	req.Header.Add("User-Agent", "Apifox/1.0.0 (https://www.apifox.cn)")
-	// 发送api请求
-	res, err := client.Do(req)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer res.Body.Close()
-
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	fmt.Println(string(body))
+func FollowerList(ctx *app.RequestContext, user User) {
+	// 将要返回的请求体序列化为json格式
+	ctx.JSON(http.StatusOK, UserListResponse{
+		Response: Response{
+			StatusCode: 0,
+		},
+		UserList: user.FollowerList,
+	})
 }
