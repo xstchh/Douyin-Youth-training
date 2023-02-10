@@ -20,7 +20,7 @@ type User struct {
 	FollowCount   int64
 	FollowerCount int64
 	IsFollow      bool
-	FollowerList  []User
+	FollowerList  []User // TODO:新添加粉丝列表属性，是否最优做法待商榷
 }
 
 func FollowerList(ctx *app.RequestContext, user User) {
