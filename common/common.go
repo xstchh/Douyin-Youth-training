@@ -11,10 +11,11 @@ type UserListResponse struct {
 }
 
 type User struct {
-	Id            int64
+	Id            int64 `json:"user_id"`
 	Name          string
 	FollowCount   int64
 	FollowerCount int64
 	IsFollow      bool
 	FollowerList  []User // TODO:新添加粉丝列表属性，是否最优做法待商榷
+	FriendList    []User // TODO:同上
 }
