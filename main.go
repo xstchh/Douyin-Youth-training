@@ -7,7 +7,7 @@ import (
 func main() {
 	h := server.Default()
 
-	// TODO:添加路由分组
+	initrouter(h)
 
 	h.Spin()
 }
