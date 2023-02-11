@@ -6,6 +6,7 @@ import (
 )
 
 func initrouter(h *server.Hertz) {
+	//root api
 	apiRouter := h.Group("/douyin")
 
 	// socialize
