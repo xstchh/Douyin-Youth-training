@@ -19,3 +19,14 @@ type User struct {
 	FollowerList  []User // TODO:新添加粉丝列表属性，是否最优做法待商榷
 	FriendList    []User // TODO:同上
 }
+
+type Video struct {
+	Id            int    `json:"id"`
+	Author        User   `json:"author"`
+	PlayUrl       string `json:"play_url"`
+	CoverUrl      string `json:"cover_url"`
+	FavoriteCount int    `json:"favorite_count"`
+	CommentCount  int    `json:"comment_count"`
+	IsFavorite    bool   `json:"is_favorite" default:"true"`
+	Title         string `json:"title"`
+}
