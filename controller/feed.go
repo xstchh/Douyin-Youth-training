@@ -11,8 +11,8 @@ import (
 
 type FeedResponse struct {
 	common.Response
-	VideoList []Video `json:"video_list,omitempty"`
-	NextTime  int64   `json:"next_time,omitempty"`
+	VideoList []common.Video `json:"video_list,omitempty"`
+	NextTime  int64          `json:"next_time,omitempty"`
 	// VideoList字段是一个视频列表，NextTime字段是下一次请求的时间戳
 }
 

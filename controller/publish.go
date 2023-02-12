@@ -12,7 +12,7 @@ import (
 
 type VideoListResponse struct {
 	common.Response
-	VideoList []Video `json:"video_list"`
+	VideoList []common.Video `json:"video_list"`
 }
 
 // Publish 检查 token 是否有效，如果有效则将上传的文件保存到public目录下，并返回成功信息
