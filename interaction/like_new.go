@@ -1,7 +1,6 @@
 package interaction
 
 import (
-
 	"Douyin-Youth-training/controller"
 	"errors"
 	"time"
@@ -21,8 +20,8 @@ type Favorite struct {
 
 // 查询用户
 
-func QueryUserByID(id int64) (*User, error) {
-	var res *User
+func QueryUserByID(id int64) (*controller.User, error) {
+	var res *controller.User
 	dsn := "abc" //这里需要用户相关数据库的dsn
 	db, err0 := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err0 != nil {
@@ -36,8 +35,8 @@ func QueryUserByID(id int64) (*User, error) {
 }
 
 // 判断视频是否存在
-func QueryVideoByID(id int64) (*Video, error) {
-	var video *Video
+func QueryVideoByID(id int64) (*controller.Video, error) {
+	var video *controller.Video
 	dsn := "abc" //这里需要视频相关数据库的dsn
 	db, err0 := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err0 != nil {
@@ -49,7 +48,7 @@ func QueryVideoByID(id int64) (*Video, error) {
 	}
 	return video, nil
 }
-func RunFavoriteAction(video Video, actionType int, user User) error {
+func RunFavoriteAction(video controller.Video, actionType int, user controller.User) error {
 	//判断用户是否存在
 	_, err := QueryUserByID(user.Id)
 	if err != nil {
@@ -100,7 +99,7 @@ func ShowFavoriteList(user_id int64) {
 	if err != nil {
 		panic("failed to connect database, error=" + err.Error())
 	}
-	videos := make([]*Video, 0)
+	videos := make([]*controller.Video, 0)
 	db.Where("UserId = ?", user_id).Find(&videos)
 	//怎么呈现出来
 }
