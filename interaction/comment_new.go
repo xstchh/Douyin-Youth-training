@@ -1,7 +1,7 @@
-package main
+package interaction
 
 import (
-	//"Douyin-Youth-training/controller"
+	"Douyin-Youth-training/controller"
 	"errors"
 	"time"
 
