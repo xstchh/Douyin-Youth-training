@@ -2,33 +2,13 @@ package main
 
 import (
 
-	//"Douyin-Youth-training/controller"
+	"Douyin-Youth-training/controller"
 	"errors"
 	"time"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
-
-type Video struct {
-	Id            int64  `json:"id,omitempty"`
-	Author        User   `json:"author"`
-	PlayUrl       string `json:"play_url" json:"play_url,omitempty"`
-	CoverUrl      string `json:"cover_url,omitempty"`
-	FavoriteCount int64  `json:"favorite_count,omitempty"`
-	CommentCount  int64  `json:"comment_count,omitempty"`
-	IsFavorite    bool   `json:"is_favorite,omitempty"`
-}
-
-type User struct {
-	Id            int64 `json:"user_id"`
-	Name          string
-	FollowCount   int64
-	FollowerCount int64
-	IsFollow      bool
-	FollowerList  []User // TODO:新添加粉丝列表属性，是否最优做法待商榷
-	FriendList    []User // TODO:同上
-}
 
 // 喜欢列表对应结构体
 type Favorite struct {
