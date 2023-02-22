@@ -1,14 +1,14 @@
 # Douyin-Youth-training - 142857Group
 
 > ## Constructure
-> ### basic (基本完善)
+> ### Basic
 >
 > 基础功能
 >
-> ### interaction (初具雏形)
+> ### Interaction 
 > 互动方向
 >
-> ### socialize (开发中...)
+> ### Socialize
 > 社交方向
 
 ---
@@ -37,13 +37,15 @@
 
 
 
+## update informations - 2.22
+
+完善`README.md`文件
+
 ---
 
 ## Code Overview：
 
-
-
-
+---
 
 
 
@@ -66,6 +68,8 @@ CommentAction 函数接收一个 gin.Context 参数，
 则返回一个状态码为0的响应。
 
 
+
+---
 
 
 
@@ -97,6 +101,8 @@ CommentAction 函数接收一个 gin.Context 参数，
 
 
 
+---
+
 
 
 ### feed.go
@@ -108,6 +114,8 @@ CommentAction 函数接收一个 gin.Context 参数，
 
 
 
+
+---
 
 
 
@@ -143,6 +151,8 @@ MessageChat 函数是一个获取与另一个用户的聊天记录的接口，
 
 
 
+---
+
 
 
 
@@ -156,6 +166,8 @@ MessageChat 函数是一个获取与另一个用户的聊天记录的接口，
 还有获取所有用户发布的视频列表。
 
 
+
+---
 
 
 
@@ -171,6 +183,8 @@ MessageChat 函数是一个获取与另一个用户的聊天记录的接口，
 
 
 
+---
+
 
 
 
@@ -183,20 +197,18 @@ MessageChat 函数是一个获取与另一个用户的聊天记录的接口，
 
 ## Group member
 
-xs
+许胜
 
-gyf
+巩羽飞
 
-dyz
+董亚竺
 
-ywb
+杨文冰
 
-lp
+刘鹏
 
-ll
-
-（个人简介待补充）
+李露
 
 ---
 
-感谢阅读
+感谢阅读！
