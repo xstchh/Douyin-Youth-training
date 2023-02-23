@@ -93,13 +93,19 @@ func RunFavoriteAction(video controller.Video, actionType int, user controller.U
 	return nil
 }
 
-func ShowFavoriteList(user_id int64) {
-	dsn := "table_name: favorite"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+func ShowFavoriteList(ctx context.Context, c *app.RequestContext) {
+	userId := c.Query("user_id")
+	db, err := gorm.Open(mysql.Open("dsn"), &gorm.Config{}) //dsn没搞
 	if err != nil {
 		panic("failed to connect database, error=" + err.Error())
 	}
-	videos := make([]*controller.Video, 0)
-	db.Where("UserId = ?", user_id).Find(&videos)
-	//怎么呈现出来
+	var videos_list []controller.Video
+	db.Where("UserId = ?", userId).Find(&videos_list)
+	//返回请求序列化为josn格式
+	c.JOSN(http.StatusOk, controller.VideoListResponse{
+		Response: controller.Response{
+			StatusCode: 0, StatusMsg: "success"},
+		VideoList: videos_list,
+	})
 }
+
