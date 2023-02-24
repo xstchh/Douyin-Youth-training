@@ -2,12 +2,13 @@ package interaction
 
 import (
 	"Douyin-Youth-training/controller"
+	"context"
 	"errors"
-	"time"
-	"net/http"
 	"github.com/cloudwego/hertz/pkg/app"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"net/http"
+	"time"
 )
 
 // 喜欢列表对应结构体
@@ -103,10 +104,9 @@ func ShowFavoriteList(ctx context.Context, c *app.RequestContext) {
 	var videos_list []controller.Video
 	db.Where("UserId = ?", userId).Find(&videos_list)
 	//返回请求序列化为josn格式
-	c.JOSN(http.StatusOk, controller.VideoListResponse{
+	c.JSON(http.StatusOK, controller.VideoListResponse{
 		Response: controller.Response{
 			StatusCode: 0, StatusMsg: "success"},
 		VideoList: videos_list,
 	})
 }
-
