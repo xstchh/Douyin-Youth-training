@@ -1,9 +1,13 @@
 package socialize
 
 import (
+	"context"
 	"log"
 	"sync"
 
+	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/common/utils"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -33,14 +37,21 @@ func UniFollow() *FollowUser {
 		})
 	return followuser
 }
-func (*FollowUser) GetFollowingList(userId int64, db *gorm.DB) ([]int64, error) {
+func (*FollowUser) GetFollowingList(ctx context.Context, c *app.RequestContext) {
+	userId := c.Param("user_id")
+	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		log.Println("failed to link")
+	}
 	var ids []int64
 	if err := db.Model(Follow{}).Where("follower.id = ?", userId).Pluck("user_id", &ids).Error; nil != err {
 		if "record not found" == err.Error() {
-			return nil, nil
+			log.Println(err.Error())
 		}
 		log.Println(err.Error())
-		return nil, err
 	}
-	return ids, nil
+	c.JSON(200, utils.H{
+		"UserList": ids,
+	})
+	log.Println("success!")
 }
