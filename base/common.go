@@ -1,5 +1,7 @@
 package base
 
+import "gorm.io/gorm"
+
 type Response struct {
 	StatusCode int32  `json:"status_code"`
 	StatusMsg  string `json:"status_msg,omitempty"`
@@ -11,8 +13,11 @@ type UserListResponse struct {
 }
 
 type User struct {
+	gorm.Model
 	Id            int64 `json:"user_id"`
 	Name          string
+	PassWord      string
+	Token         string
 	FollowCount   int64
 	FollowerCount int64
 	IsFollow      bool
