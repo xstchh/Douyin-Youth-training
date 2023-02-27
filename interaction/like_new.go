@@ -1,7 +1,7 @@
 package interaction
 
 import (
-	"Douyin-Youth-training/controller"
+	"Douyin-Youth-training/base"
 	"context"
 	"errors"
 	"github.com/cloudwego/hertz/pkg/app"
@@ -22,8 +22,8 @@ type Favorite struct {
 
 // 查询用户
 
-func QueryUserByID(id int64) (*controller.User, error) {
-	var res *controller.User
+func QueryUserByID(id int64) (*base.User, error) {
+	var res *base.User
 	dsn := "abc" //这里需要用户相关数据库的dsn
 	db, err0 := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err0 != nil {
@@ -37,8 +37,8 @@ func QueryUserByID(id int64) (*controller.User, error) {
 }
 
 // 判断视频是否存在
-func QueryVideoByID(id int64) (*controller.Video, error) {
-	var video *controller.Video
+func QueryVideoByID(id int64) (*base.Video, error) {
+	var video *base.Video
 	dsn := "abc" //这里需要视频相关数据库的dsn
 	db, err0 := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err0 != nil {
@@ -50,7 +50,7 @@ func QueryVideoByID(id int64) (*controller.Video, error) {
 	}
 	return video, nil
 }
-func RunFavoriteAction(video controller.Video, actionType int, user controller.User) error {
+func RunFavoriteAction(video base.Video, actionType int, user base.User) error {
 	//判断用户是否存在
 	_, err := QueryUserByID(user.Id)
 	if err != nil {
@@ -101,11 +101,11 @@ func ShowFavoriteList(ctx context.Context, c *app.RequestContext) {
 	if err != nil {
 		panic("failed to connect database, error=" + err.Error())
 	}
-	var videos_list []controller.Video
+	var videos_list []base.Video
 	db.Where("UserId = ?", userId).Find(&videos_list)
 	//返回请求序列化为josn格式
-	c.JSON(http.StatusOK, controller.VideoListResponse{
-		Response: controller.Response{
+	c.JSON(http.StatusOK, base.VideoListResponse{
+		Response: base.Response{
 			StatusCode: 0, StatusMsg: "success"},
 		VideoList: videos_list,
 	})

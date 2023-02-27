@@ -1,7 +1,7 @@
 package socialize
 
 import (
-	"Douyin-Youth-training/controller"
+	"Douyin-Youth-training/base"
 	"context"
 	"net/http"
 
@@ -18,11 +18,11 @@ func FollowerList(ctx context.Context, c *app.RequestContext) {
 	if err != nil {
 		panic("failed to connect database")
 	}
-	var user controller.User
+	var user base.User
 	db.First(&user, userId)
 	// 将要返回的请求体序列化为json格式
-	c.JSON(http.StatusOK, controller.UserListResponse{
-		Response: controller.Response{
+	c.JSON(http.StatusOK, base.UserListResponse{
+		Response: base.Response{
 			StatusCode: 0,
 		},
 		UserList: user.FollowerList,

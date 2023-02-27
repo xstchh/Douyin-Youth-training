@@ -1,7 +1,7 @@
 package interaction
 
 import (
-	"Douyin-Youth-training/controller"
+	"Douyin-Youth-training/base"
 	"errors"
 	"time"
 
@@ -11,10 +11,10 @@ import (
 )
 
 type Comment struct {
-	Id         int64            `json:"id,omitempty"`
-	User       controller.User  `json:"user"`
-	Video      controller.Video `json:"video"`
-	Content    string           `json:"content,omitempty" gorm:"column:comment;"`
+	Id         int64      `json:"id,omitempty"`
+	User       base.User  `json:"user"`
+	Video      base.Video `json:"video"`
+	Content    string     `json:"content,omitempty" gorm:"column:comment;"`
 	CreateDate time.Time
 	DeleteDate gorm.DeletedAt
 }
@@ -33,7 +33,7 @@ func QueryCommentById(id int64) (*Comment, error) {
 }
 
 // 我参考的代码上有ctx context.Context这个参数，但我还不太会，就先不要了
-func RunCommentAction(commentId int64, video controller.Video, actionType int, user controller.User, commentText string) error {
+func RunCommentAction(commentId int64, video base.Video, actionType int, user base.User, commentText string) error {
 	//判断用户是否存在
 	_, err := QueryUserByID(user.Id)
 	if err != nil {

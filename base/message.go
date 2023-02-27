@@ -1,4 +1,4 @@
-package controller
+package base
 
 import (
 	"fmt"
@@ -22,10 +22,10 @@ type ChatResponse struct {
 // MessaaeAction没有实际的效果，只是检查token是否有效
 
 /*
-	更具体地：
-	MessageAction 函数是一个处理用户发送消息的接口，
-	它会接收一个 token、to_user_id 和 content 参数。
-	如果 token 是有效的，那么就会创建一条新的消息，并将其追加到临时消息列表中。
+更具体地：
+MessageAction 函数是一个处理用户发送消息的接口，
+它会接收一个 token、to_user_id 和 content 参数。
+如果 token 是有效的，那么就会创建一条新的消息，并将其追加到临时消息列表中。
 */
 func MessageAction(c *gin.Context) {
 	token := c.Query("token")
@@ -76,9 +76,9 @@ func MessageChat(c *gin.Context) {
 }
 
 /*
-	genChatKey 函数是一个生成两个用户之间聊天的键值的函数，
-	它会接收两个 int64 类型的参数（userIdA和userIdB）并返回一个字符串。
-	该字符串是由两个用户 ID 组成的，中间用下划线隔开。
+genChatKey 函数是一个生成两个用户之间聊天的键值的函数，
+它会接收两个 int64 类型的参数（userIdA和userIdB）并返回一个字符串。
+该字符串是由两个用户 ID 组成的，中间用下划线隔开。
 */
 func genChatKey(userIdA int64, userIdB int64) string {
 	if userIdA > userIdB {
